@@ -1,5 +1,13 @@
-# Online News Popularity — Regression Analysis
-## Setup & Running Guide
+# Machine Learning Analysis — Regression & Classification
+
+This repository contains two end-to-end machine learning notebooks, each covering the full analysis lifecycle: exploratory data analysis, assumptions validation, train/test splitting, cross-validation, hyperparameter tuning, and results validation.
+
+| Notebook | Task | Dataset |
+|---|---|---|
+| `online_news_regression_analysis.ipynb` | Regression | [UCI Online News Popularity](https://archive.ics.uci.edu/dataset/332/online+news+popularity) |
+| `adult_income_classification_analysis.ipynb` | Classification | [UCI Adult / Census Income](https://archive.ics.uci.edu/dataset/2/adult) |
+
+Both notebooks download their datasets automatically via `ucimlrepo` — no manual downloads needed.
 
 ---
 
@@ -7,9 +15,6 @@
 
 Python 3.9+ required. Check with: `python --version`
 
-### Install dependencies
-
-Using a requirements file:
 ```bash
 pip install -r requirements.txt
 ```
@@ -18,45 +23,44 @@ pip install -r requirements.txt
 
 ## 🖥️ Running Locally
 
-### Option A: Jupyter Notebook (Recommended for learning)
+### Jupyter Notebook
 ```bash
-cd online_news_popularity
-jupyter notebook online_news_regression_analysis.ipynb
+jupyter notebook
 ```
-Then open the URL that appears in terminal (e.g., http://localhost:8888)
+Then open either notebook from the Jupyter file browser.
 
-### Option B: VS Code
-1. Open VS Code
-2. Install extension: **Jupyter** (by Microsoft)
-3. Open `online_news_regression_analysis.ipynb`
-4. Click **Select Kernel** → choose your Python environment
-5. Click **Run All** or run cells one by one with Shift+Enter
-
-### Option C: Spyder
-1. Open Spyder
-2. In the file browser (left panel), navigate to this folder
-3. Double-click the `.ipynb` file — Spyder opens it in notebook mode
-4. Or: copy cell content into a `.py` script and run via F5
+### VS Code
+1. Install the **Jupyter** extension (by Microsoft)
+2. Open either `.ipynb` file
+3. Select a Python kernel, then **Run All**
 
 ---
 
-## ☁️ Running on Cloud Platforms
+## 📓 Notebook 1: Online News Popularity (Regression)
 
-### Google Colab (GCP)
-1. Go to https://colab.research.google.com
-2. File → Upload notebook → select `online_news_regression_analysis.ipynb`
-3. All packages are pre-installed on Colab (just run cells)
-4. OR open directly from GitHub if you push this repo
+**Goal**: Predict the number of social media shares an article will receive based on its content and metadata.
 
-### Azure Machine Learning
-1. Go to Azure ML Studio → Notebooks
-2. Upload this `.ipynb` file
-3. Select a compute instance (Standard_DS3_v2 is sufficient)
-4. Run all cells
+**Models compared**: Linear Regression, Ridge, Lasso, Random Forest, Gradient Boosting
 
-### AWS SageMaker
-1. Go to AWS Console → SageMaker → Notebook Instances
-2. Create instance → Open JupyterLab
-3. Upload `online_news_regression_analysis.ipynb`
-4. Select kernel: `conda_python3`
-5. Run all cells
+**Highlights**:
+- Built-in feature dictionary — every column name (e.g., `kw_avg_avg`, `LDA_02`) is mapped to a plain-English description, shown throughout the notebook
+- Log-transform applied to the heavily right-skewed target (`shares`)
+- Full assumptions validation (linearity, homoscedasticity, normality, multicollinearity, independence)
+
+**Expected runtime**: ~20-30 minutes
+
+---
+
+## 📓 Notebook 2: Adult Income (Classification)
+
+**Goal**: Predict whether a person's annual income exceeds $50K based on census attributes.
+
+**Models compared**: SVC, Random Forest, XGBoost, LightGBM
+
+**Highlights**:
+- Same feature-dictionary pattern as Notebook 1
+- Stratified train/test split and stratified cross-validation (preserves the ~76%/24% class ratio)
+- ColumnTransformer pipeline (StandardScaler + OneHotEncoder) shared across all 4 models
+- Confusion matrices, ROC curves, and feature importance comparisons
+
+**Expected runtime**: ~20-30 minutes (SVC hyperparameter tuning is the slowest step)
