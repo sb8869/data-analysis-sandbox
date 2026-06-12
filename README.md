@@ -63,7 +63,7 @@ Then open the URL that appears in terminal (e.g., http://localhost:8888)
 
 ---
 
-## 📁 Output Files
+## 📁 Outputs
 
 The notebook generates these plots:
 - `eda_target_distribution.png` — shares distribution before/after log transform
