@@ -116,5 +116,34 @@ Then open either notebook from the Jupyter file browser.
 │   ├── online_news_popularity.csv
 │   └── adult_income.csv
 ├── online_news_regression_analysis.ipynb
-└── adult_income_classification_analysis.ipynb
+├── adult_income_classification_analysis.ipynb
+├── api/
+│   ├── README.md
+│   ├── requirements.txt
+│   ├── main.py
+│   ├── schemas.py
+│   └── model_artifacts/
+│       ├── regression_model.joblib
+│       └── classification_model.joblib
+└── poc/
+    ├── README.md
+    ├── requirements.txt
+    └── app.py
 ```
+
+---
+
+## 🔌 Model API
+
+Both trained models can be served as a REST API via FastAPI — see
+[`api/README.md`](api/README.md) for setup and example requests. In short:
+run the new "CELL 6-A2" cell at the end of each notebook to save the trained
+model, then `cd api && pip install -r requirements.txt && uvicorn main:app --reload`.
+
+---
+
+## 🖱️ Interactive Demo (Streamlit POC)
+
+A two-tab Streamlit app for trying out both models in a browser — see
+[`poc/README.md`](poc/README.md). Requires the same model artifacts as the
+API. Run with `cd poc && pip install -r requirements.txt && streamlit run app.py`.
